@@ -1,0 +1,32 @@
+/* Header.css */
+.custom-navbar {
+    background-color: #333;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center; /* Horizontally center the content */
+    align-items: center; /* Vertically center the content */
+  }
+  
+  .custom-nav-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  .custom-nav-link {
+    color: #fff !important;
+    margin-right: 30px;
+    font-size: 16px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  
+  .custom-nav-link:hover {
+    color: #f39c12 !important;
+  }
+  
+
+
+  
+
+
+  
