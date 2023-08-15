@@ -1,51 +1,45 @@
-import React from 'react';
-import './Cart.css'
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import React, { useContext } from "react";
+import { Button, Modal } from "react-bootstrap";
+import CartItem from "./CartItem";
+import stylesheet from './Cart.module.css';
+import CartContext from "./CartContext";
 
-const cartElements = [
-  {
-    title: 'Colors',
-    price: 100,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%201.png',
-    quantity: 2,
-  },
-  {
-    title: 'Black and white Colors',
-    price: 50,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%202.png',
-    quantity: 3,
-  },
-  {
-    title: 'Yellow and Black Colors',
-    price: 70,
-    imageUrl: 'https://prasadyash2411.github.io/ecom-website/img/Album%203.png',
-    quantity: 1,
-  },
-];
+const Cart = (props) => {
+    const cartContext = useContext(CartContext);
+    const isCartHaveItems = cartContext.products.length > 0;
+    const cartItemList = cartContext.products.map((product) => (
+        <CartItem
+            key={product.id}
+            title={product.title}
+            price={product.price}
+            imageUrl={product.imageUrl}
+            quantity={product.quantity}
+        />
+    ));
 
-const Cart = () => {
+    // logic to total amount
+    let totalAmount = 0;
+    cartContext.products.forEach((product) => {
+        totalAmount = totalAmount + Number(product.price * product.quantity)
+    });
     return (
-      <div className="cart-container mx-auto">
-        <h2>Your Cart</h2>
-        <Container>
-          <Row xs={1} md={2} lg={3} className="g-4">
-            {cartElements.map((product, index) => (
-              <Col key={index}>
-                <Card className="cart-item">
-                  <Card.Img variant="top" src={product.imageUrl} alt={product.title} />
-                  <Card.Body>
-                    <Card.Title className="cart-title">{product.title}</Card.Title>
-                    <Card.Text className="cart-price">Price: ${product.price}</Card.Text>
-                    <Card.Text className="cart-quantity">Quantity: {product.quantity}</Card.Text>
-                    <Card.Text className="cart-total">Total: ${product.price * product.quantity}</Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        </Container>
-      </div>
-    );
-  };
+        <Modal fullscreen='xxl-down'
+            show={props.openCart}
+            onHide={props.onHideCart}
+            size="lg"
+            aria-labelledby="example-custom-modal-styling-title">
+
+            <Modal.Header closeButton>
+                <Modal.Title>Cart</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{cartItemList}</Modal.Body>
+            <Modal.Footer>
+                Total {`₹ ${totalAmount.toFixed(2)}`}
+                <Button className={stylesheet["place-order-btn"]}>Order Now</Button>
+            </Modal.Footer>
+        </Modal>
+    )
+}
 
 export default Cart;
+
