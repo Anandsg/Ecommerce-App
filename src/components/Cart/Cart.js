@@ -16,12 +16,6 @@ const Cart = (props) => {
             quantity={product.quantity}
         />
     ));
-
-    // logic to total amount
-    let totalAmount = 0;
-    cartContext.products.forEach((product) => {
-        totalAmount = totalAmount + Number(product.price * product.quantity)
-    });
     return (
         <Modal fullscreen='xxl-down'
             show={props.openCart}
@@ -34,7 +28,7 @@ const Cart = (props) => {
             </Modal.Header>
             <Modal.Body>{cartItemList}</Modal.Body>
             <Modal.Footer>
-                Total {`₹ ${totalAmount.toFixed(2)}`}
+                Total {`₹ ${cartContext.totalAmount}`}
                 <Button className={stylesheet["place-order-btn"]}>Order Now</Button>
             </Modal.Footer>
         </Modal>

@@ -2,32 +2,47 @@ import React, { useState } from "react";
 import CartContext from "./CartContext";
 
 const CartProvider = (props) => {
-  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
   // adding product in cart
-  const addProductToCardHandler = (product) => {
-    let cartProducts = [...products];
+  const addProductToCardHandler = (product, index) => {
+    let cartProducts = [...cart];
     let isProductPresent = false;
+    // Create a new object with the updated quantity
+    const updatedProduct = { ...product };
 
     cartProducts.forEach((item) => {
       if (product.id === item.id) {
         isProductPresent = true;
-        item.quantity = Number(product.quantity) + Number(product.quantity);
+        // Increment the quantity of the existing product
+        // item.quantity += Number(product.quantity) + Number(product.quantity);
+        item.quantity += Number(product.quantity);
       }
     });
     if (isProductPresent) {
-      setProducts(cartProducts);
+      setCart([...cartProducts]);
     } else {
-      setProducts((prevProducts) => {
+      setCart((prevProducts) => {
         return [...prevProducts, product];
       });
     }
   };
-  const removeProductToCardHandler = () => {};
+  // calculating the total amount
+  const totalAmount = cart.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0)
+
+  // calculating the total quantity
+  const totalQuantity = cart.reduce((total, item) => {
+    return total + item.quantity;
+  }, 0);
+
+  const removeProductToCardHandler = () => { };
   const cartContext = {
-    products: products,
+    products: cart,
     addProduct: addProductToCardHandler,
     removeProduct: removeProductToCardHandler,
-    totalAmount: products.length,
+    totalAmount: totalAmount,
+    totalQuantity: totalQuantity,
   };
   return (
     <CartContext.Provider value={cartContext}>

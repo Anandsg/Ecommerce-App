@@ -7,7 +7,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const CartButton = (props) => {
     const cartContext = useContext(CartContext);
-    const quantity = cartContext.totalAmount;
+
     return (
         <>
             <Button className={stylesheet['cart-button']}
@@ -15,7 +15,7 @@ const CartButton = (props) => {
                 <AiOutlineShoppingCart />
             </Button>
             <Badge pill bg="#ff3f6c" className={stylesheet["total-item"]}>
-                {quantity}
+                {cartContext.totalQuantity}
             </Badge>
         </>
     );
