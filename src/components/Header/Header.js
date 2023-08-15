@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
+import { Container, Navbar, Nav, NavLink } from "react-bootstrap";
 import CartButton from "./CartButton";
 
 const Header = (props) => {
@@ -10,9 +10,15 @@ const Header = (props) => {
                     The Generics
                 </Navbar.Brand>
                 <Nav className={'me-auto'}>
-                    <Nav.Link href="#" >Home</Nav.Link>
-                    <Nav.Link href="#">Store</Nav.Link>
-                    <Nav.Link href="#">About</Nav.Link>
+                    <NavLink to='/home' className="nav-link" style={{ color: 'black' }}>
+                        Home
+                    </NavLink>
+                    <NavLink to='/' className="nav-link" style={{ color: 'black' }}>
+                        Store
+                    </NavLink>
+                    <NavLink to='/about' className="nav-link" style={{ color: 'black' }}>
+                        About
+                    </NavLink>
                 </Nav>
                 <div className="d-flex w-auto mb-3">
                     <CartButton onOpenCart={props.onOpenCart} />

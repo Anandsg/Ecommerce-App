@@ -19,7 +19,7 @@ const ProductItem = (props) => {
         </div>
         <Card.Body>
           <Card.Title>{props.title}</Card.Title>
-          <Card.Text className={styleSheet.price}> {price}</Card.Text>
+          <Card.Text className={styleSheet.price}> ₹{price}</Card.Text>
           <AddToCart id={props.id} item={props} />
         </Card.Body>
       </Card>
