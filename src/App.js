@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './components/Header/Header';
-import ProductStore from './components/Home/Home';
+import Store from './components/Pages/Store';
+import Home from './components/Pages/Home';
 import Cart from './components/Cart/Cart';
 import CartProvider from './components/Cart/CartProvider';
 import About from './components/Pages/About';
@@ -24,7 +25,8 @@ function App() {
         {openCart && <Cart openCart={openCart} onHideCart={hideCartHandler} />}
         
         <Routes>
-          <Route path="/" element={<ProductStore />} />
+        <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Store />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </div>

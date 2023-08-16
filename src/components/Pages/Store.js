@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row } from 'react-bootstrap';
 import ProductItem from '../Products/ProductItem';
 
-const ProductStore = (props) => {
+const Store = (props) => {
     const prodcuctArr = [
         {
             id: "p1",
@@ -56,4 +56,4 @@ const ProductStore = (props) => {
         </>
     )
 }
-export default ProductStore;
+export default Store;
