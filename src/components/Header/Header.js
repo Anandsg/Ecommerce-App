@@ -13,10 +13,10 @@ const Header = (props) => {
                     <NavLink to='/home' className="nav-link">
                         Home
                     </NavLink>
-                    <NavLink to='/' className="nav-link" style={{ color: 'black' }}>
+                    <NavLink to='/' className="nav-link">
                         Store
                     </NavLink>
-                    <NavLink to='/about' className="nav-link" style={{ color: 'black' }}>
+                    <NavLink to='/about' className="nav-link">
                         About
                     </NavLink>
                 </Nav>

@@ -23,9 +23,9 @@ function App() {
       <div>
         <Header onOpenCart={openCartHandler} />
         {openCart && <Cart openCart={openCart} onHideCart={hideCartHandler} />}
-        
+
         <Routes>
-        <Route path="/home" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/" element={<Store />} />
           <Route path="/about" element={<About />} />
         </Routes>
