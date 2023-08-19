@@ -6,6 +6,7 @@ import Cart from './components/Cart/Cart';
 import CartProvider from './components/Cart/CartProvider';
 import About from './components/Pages/About';
 import { Routes, Route } from 'react-router-dom';
+import Contact from './components/Pages/Contact';
 
 function App() {
   const [openCart, setOpenCart] = useState(false);
@@ -28,6 +29,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/" element={<Store />} />
           <Route path="/about" element={<About />} />
+          <Route path='/contact' element={<Contact />} />
         </Routes>
       </div>
     </CartProvider>
