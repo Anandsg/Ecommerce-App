@@ -1,11 +1,11 @@
 import React from 'react'
 import { Container, Row } from 'react-bootstrap';
 import ProductItem from '../Products/ProductItem';
-import { prodcuctArr } from '../Products/ProductsData';
+import { productsData } from '../Products/ProductsData';
 
 const Store = (props) => {
 
-    const ProductsList = prodcuctArr.map((product) => (
+    const ProductsList = productsData.map((product) => (
         <ProductItem
             key={product.id}
             id={product.id}

@@ -7,6 +7,7 @@ import CartProvider from './components/Cart/CartProvider';
 import About from './components/Pages/About';
 import { Routes, Route } from 'react-router-dom';
 import Contact from './components/Pages/Contact';
+import Product from './components/Products/Product';
 
 function App() {
   const [openCart, setOpenCart] = useState(false);
@@ -30,6 +31,7 @@ function App() {
           <Route path="/" element={<Store />} />
           <Route path="/about" element={<About />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='/product/:productId' element={<Product />} />
         </Routes>
       </div>
     </CartProvider>
