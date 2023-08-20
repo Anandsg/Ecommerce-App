@@ -8,6 +8,7 @@ import About from './components/Pages/About';
 import { Routes, Route } from 'react-router-dom';
 import Contact from './components/Pages/Contact';
 import Product from './components/Products/Product';
+import Authentication from './components/Auth/Authentication';
 
 function App() {
   const [openCart, setOpenCart] = useState(false);
@@ -27,11 +28,12 @@ function App() {
         {openCart && <Cart openCart={openCart} onHideCart={hideCartHandler} />}
 
         <Routes>
-          <Route path="/home" element={<Home />} />
-          <Route path="/" element={<Store />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/store" element={<Store />} />
           <Route path="/about" element={<About />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/product/:productId' element={<Product />} />
+          <Route path="/auth" element={<Authentication />} />
         </Routes>
       </div>
     </CartProvider>
