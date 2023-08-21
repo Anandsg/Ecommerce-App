@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import stylesheet from "./Authentication.module.css";
+import AuthContext from "../Store/AuthContext";
 
 const Authentication = () => {
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
+    const authcontext = useContext(AuthContext);
     const [isLogin, setIsLogin] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -14,16 +16,17 @@ const Authentication = () => {
 
     const submitHandler = (event) => {
         event.preventDefault();
+
         const enteredEmail = emailInputRef.current.value;
         const enteredPassword = passwordInputRef.current.value;
         setIsLoading(true);
         let url;
-        if (!isLogin) {
+        if (isLogin) {
             url =
-                "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyC_useXg33IciPohzvz4_4opobLCfElzsg";
+                "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDaORViGjxhCTOkqW655oclUgQ3u-qmK0c";
         } else {
             url =
-                "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC_useXg33IciPohzvz4_4opobLCfElzsg";
+                "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDaORViGjxhCTOkqW655oclUgQ3u-qmK0c";
         }
         fetch(url, {
             method: "POST",
@@ -47,7 +50,10 @@ const Authentication = () => {
                 }
             })
             .then((data) => {
-                console.log("Authenticated successfully. idToken:", data.idToken);
+                // console.log("Authenticated successfully. idToken:", data.idToken);
+                console.log(data);
+                authcontext.login(data.idToken)
+
             })
             .catch((err) => {
                 alert(err.message);
@@ -82,11 +88,17 @@ const Authentication = () => {
                     </Form.Group>
                     <Form.Group>
                         {!isLoading && (
-                            <Button className={stylesheet.loginButton}>
+                            <Button type='submit'
+                                className={stylesheet.loginButton}>
                                 {isLogin ? "Login" : "Create Account"}
                             </Button>
                         )}
-                        {isLoading && <p>Sending Request...</p>}
+                        {/* {isLoading && <p>Sending Request...</p>} */}
+                        {isLoading && (
+                            <Button className={stylesheet.refreshing}>
+                                Sending Requerst...
+                            </Button>
+                        )}
                     </Form.Group>
                     <Button
                         type="button"
