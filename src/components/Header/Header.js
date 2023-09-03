@@ -2,14 +2,23 @@ import React, { useContext } from "react";
 import { Container, Navbar, Nav, NavLink, Button } from "react-bootstrap";
 import CartButton from "./CartButton";
 import { FiLogOut } from "react-icons/fi";
+import { useLocation, useNavigate } from "react-router-dom";
 import AuthContext from "../Store/AuthContext";
 
 const Header = (props) => {
     const authcontext = useContext(AuthContext);
-    const isLoggedIn = authcontext.isLoggedIn;
+    // const isLoggedIn = authcontext.isLoggedIn;
+    const navigate = useNavigate;
+
     const logoutHandler = () => {
         authcontext.logout();
+        navigate("/auth", { replace: true })
     }
+    const loginHandler = () => {
+        navigate("/auth", { replace: true })
+    }
+    const location = useLocation()
+
     return (
         <Navbar
             className="bg-body-tertiary"
@@ -19,10 +28,12 @@ const Header = (props) => {
                     The Generics
                 </Navbar.Brand>
                 <Nav className={'me-auto'}>
-                    <NavLink to='/home' className="nav-link">
-                        Home
+                    <NavLink to="/" style={{ textDecoration: 'none' }} >
+                        <NavLink to='/home' className="nav-link">
+                            Home
+                        </NavLink>
                     </NavLink>
-                    <NavLink to='/' className="nav-link">
+                    <NavLink to='/store' className="nav-link">
                         Store
                     </NavLink>
                     <NavLink to='/about' className="nav-link">
@@ -31,11 +42,34 @@ const Header = (props) => {
                     <NavLink to='/contact' className="nav-link">
                         Contact us
                     </NavLink>
+                    {!authcontext.isLoggedIn && location.pathname !== "/auth" && (
+                        <Button onClick={loginHandler} style={{
+                            fontSize: "1.3rem",
+                            marginLeft: "0.50rem",
+                            backgroundColor: "transparent",
+                            border: "none",
+                            color: "#ff3f6c"
+                        }} >
+                            Login
+                        </Button>
+                    )
+                    }
                 </Nav>
-                <div className="d-flex w-auto mb-3">
+                {/* <div className="d-flex w-auto mb-3">
                     <CartButton onOpenCart={props.onOpenCart} />
                 </div>
-                {authcontext.isLoggedIn && (
+                {authcontext.isLoggedIn && ( */}
+                {authcontext.isLoggedIn &&
+                    location.pathname !== "/home" &&
+                    location.pathname !== "/about" &&
+                    location.pathname !== "/contact" &&
+                    location.pathname !== "/auth" && (
+                        <div className="d-flex w-auto mb-3 ">
+                            <CartButton onOpenCart={props.onOpenCart} />
+                        </div>
+                    )
+                }
+                {authcontext.isLoggedIn && location.pathname !== "/auth" && (
                     <Button
                         style={{
                             fontSize: "1.3rem",
