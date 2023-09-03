@@ -9,8 +9,11 @@ import { Routes, Route } from 'react-router-dom';
 import Contact from './components/Pages/Contact';
 import Product from './components/Products/Product';
 import Authentication from './components/Auth/Authentication';
+import { useContext } from 'react';
+import AuthContext from './components/Store/AuthContext';
 
 function App() {
+  const authcontext = useContext(AuthContext);
   const [openCart, setOpenCart] = useState(false);
 
   const openCartHandler = () => {
@@ -23,19 +26,25 @@ function App() {
 
   return (
     <CartProvider>
-      <div>
-        <Header onOpenCart={openCartHandler} />
-        {openCart && <Cart openCart={openCart} onHideCart={hideCartHandler} />}
+      <Header onOpenCart={openCartHandler} />
+      {openCart && <Cart openCart={openCart} onHideCart={hideCartHandler} />}
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/about" element={<About />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/product/:productId' element={<Product />} />
-          <Route path="/auth" element={<Authentication />} />
-        </Routes>
-      </div>
+      <Routes>
+        <>
+          {authcontext.isLoggedIn && (
+            <>
+              <Route path="/home" element={<Home />} />
+              <Route path="/store" element={<Store />} />
+              <Route path="/about" element={<About />} />
+              <Route path='/contact' element={<Contact />} />
+              <Route path='/product/:productId' element={<Product />} />
+            </>
+          )}
+          {!authcontext.isLoggedIn && <Route path="/auth"
+            element={<Authentication />} />}
+        </>
+      </Routes>
+
     </CartProvider>
   );
 }
