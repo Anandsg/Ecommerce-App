@@ -14,9 +14,6 @@ const Header = (props) => {
         authcontext.logout();
         navigate("/auth", { replace: true })
     }
-    const loginHandler = () => {
-        navigate("/auth", { replace: true })
-    }
     const location = useLocation()
 
     return (
@@ -42,18 +39,6 @@ const Header = (props) => {
                     <NavLink to='/contact' className="nav-link">
                         Contact us
                     </NavLink>
-                    {!authcontext.isLoggedIn && location.pathname !== "/auth" && (
-                        <Button onClick={loginHandler} style={{
-                            fontSize: "1.3rem",
-                            marginLeft: "0.50rem",
-                            backgroundColor: "transparent",
-                            border: "none",
-                            color: "#ff3f6c"
-                        }} >
-                            Login
-                        </Button>
-                    )
-                    }
                 </Nav>
                 {/* <div className="d-flex w-auto mb-3">
                     <CartButton onOpenCart={props.onOpenCart} />

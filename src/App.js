@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Header from './components/Header/Header';
 import Store from './components/Pages/Store';
 import Home from './components/Pages/Home';
@@ -27,24 +27,35 @@ function App() {
   return (
     <CartProvider>
       <Header onOpenCart={openCartHandler} />
-      {openCart && <Cart openCart={openCart} onHideCart={hideCartHandler} />}
+      <Suspense fallback={<div>Loading...</div>}>
+        {openCart && <Cart openCart={openCart} onHideCart={hideCartHandler} />}
 
-      <Routes>
-        <>
-          {authcontext.isLoggedIn && (
-            <>
-              <Route path="/home" element={<Home />} />
-              <Route path="/store" element={<Store />} />
-              <Route path="/about" element={<About />} />
-              <Route path='/contact' element={<Contact />} />
-              <Route path='/product/:productId' element={<Product />} />
-            </>
-          )}
-          {!authcontext.isLoggedIn && <Route path="/auth"
-            element={<Authentication />} />}
-        </>
-      </Routes>
+        <Routes>
+          <>
+            {authcontext.isLoggedIn && (
+              <>
+                <Route path="/home" element={<Home />} />
+                <Route path="/store" element={<Store />} />
+                <Route path="/about" element={<About />} />
+                <Route path='/contact' element={<Contact />} />
+                <Route path='/product/:productId' element={<Product />} />
+              </>
+            )}
+            {!authcontext.isLoggedIn && <Route path="/auth"
+              element={<Authentication />} />}
+            {!authcontext.isLoggedIn && (
+              <>
+                <Route path="/home" element={<Authentication />} />
+                <Route path="/store" element={<Authentication />} />
+                <Route path="/about" element={<Authentication />} />
+                <Route path="/contact" element={<Authentication />} />
+                <Route path="/auth" element={<Authentication />} />
 
+              </>
+            )}
+          </>
+        </Routes>
+      </Suspense>
     </CartProvider>
   );
 }
