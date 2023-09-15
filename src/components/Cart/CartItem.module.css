@@ -1,9 +1,9 @@
-.remove-item-btn{
-    background:  #ff3f6c !important;
-    outline: none;
-    border: none;
-    border:  1px solid #ff3f6c !important;
+.remove-item-btn {
+  background: #c28593 !important;
+  outline: none;
+  border: none;
+  border: 1px solid #c28593 !important;
 }
-.remove-item-btn:hover{
-    background-color: #e93d67;
+.remove-item-btn:hover {
+  background-color: #c28593;
 }

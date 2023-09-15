@@ -1,9 +1,9 @@
-.place-order-btn{
-    background:  #ff3f6c !important;
-    outline: none;
-    border: none;
-    border: 1px solid #ff3f6c !important;
-  }
-  .place-order-btn:hover{
-      background-color: rgb(233, 61, 103) !important;
-  }
+.place-order-btn {
+  background: #c28593 !important;
+  outline: none;
+  border: none;
+  border: 1px solid #c28593 !important;
+}
+.place-order-btn:hover {
+  background-color: rgb(182, 128, 142) !important;
+}

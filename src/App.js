@@ -1,34 +1,38 @@
-import React, { useState, Suspense } from 'react';
-import Header from './components/Header/Header';
-import Store from './components/Pages/Store';
-import Home from './components/Pages/Home';
-import Cart from './components/Cart/Cart';
-import CartProvider from './components/Cart/CartProvider';
-import About from './components/Pages/About';
-import { Routes, Route } from 'react-router-dom';
-import Contact from './components/Pages/Contact';
-import Product from './components/Products/Product';
-import Authentication from './components/Auth/Authentication';
-import { useContext } from 'react';
-import AuthContext from './components/Store/AuthContext';
+import { Suspense, useState, lazy, useContext } from "react";
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+
+import Header from "./Components/Header/Header";
+import Cart from "./Components/Cart/Cart";
+import CartProvider from "./Store/CartProvider";
+
+import Authentication from "./Components/Auth/Authentication";
+import AuthContext from "./Store/AuthContext";
+
+const Home = lazy(() => import('./Pages/Home'));
+const About = lazy(() => import('./Pages/About'));
+const Store = lazy(() => import('./Pages/Store'));
+const Product = lazy(() => import('./Pages/Product'));
+const Contact = lazy(() => import('./Pages/Contact'));
+
+
 
 function App() {
-  const authcontext = useContext(AuthContext);
+  const authcontext = useContext(AuthContext)
   const [openCart, setOpenCart] = useState(false);
 
   const openCartHandler = () => {
     setOpenCart(true);
-  }
-
-  const hideCartHandler = () => {
+  };
+  const hideCardHandler = () => {
     setOpenCart(false);
-  }
+  };
 
   return (
     <CartProvider>
       <Header onOpenCart={openCartHandler} />
       <Suspense fallback={<div>Loading...</div>}>
-        {openCart && <Cart openCart={openCart} onHideCart={hideCartHandler} />}
+        {openCart && <Cart openCart={openCart} onHindeCart={hideCardHandler} />}
 
         <Routes>
           <>
@@ -38,8 +42,9 @@ function App() {
                 <Route path="/home" element={<Home />} />
                 <Route path="/store" element={<Store />} />
                 <Route path="/about" element={<About />} />
-                <Route path='/contact' element={<Contact />} />
-                <Route path='/product/:productId' element={<Product />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/product/:productId" element={<Product />} />
+
               </>
             )}
             {!authcontext.isLoggedIn && (
@@ -61,3 +66,4 @@ function App() {
 }
 
 export default App;
+
