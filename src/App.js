@@ -41,10 +41,9 @@ function App() {
                 <Route path='/product/:productId' element={<Product />} />
               </>
             )}
-            {!authcontext.isLoggedIn && <Route path="/auth"
-              element={<Authentication />} />}
             {!authcontext.isLoggedIn && (
               <>
+                <Route path="/" element={<Authentication />} />
                 <Route path="/home" element={<Authentication />} />
                 <Route path="/store" element={<Authentication />} />
                 <Route path="/about" element={<Authentication />} />
