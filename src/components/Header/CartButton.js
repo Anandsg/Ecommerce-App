@@ -1,16 +1,10 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Badge, Button } from 'react-bootstrap';
 import stylesheet from './CartButton.module.css';
-import CartContext from '../Cart/CartContext';
 import { AiOutlineShoppingCart } from "react-icons/ai";
 
 
 const CartButton = (props) => {
-    const cartcontext = useContext(CartContext);
-    const numberOfCartItems = cartcontext.products.reduce((curNumber, item) => {
-        return curNumber + item.amount;
-    }, 0);
-
     return (
         <>
             <Button className={stylesheet['cart-button']}
@@ -18,7 +12,7 @@ const CartButton = (props) => {
                 <AiOutlineShoppingCart />
             </Button>
             <Badge pill bg="#ff3f6c" className={stylesheet["total-item"]}>
-                {numberOfCartItems}
+                {props.totalQuantity}
             </Badge>
         </>
     );

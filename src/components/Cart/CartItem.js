@@ -5,6 +5,10 @@ import CartContext from './CartContext';
 
 const CartItem = (props) => {
     const { updateQuantity } = useContext(CartContext);
+    const handleQuantityChange = (event) => {
+        const newQuantity = +event.target.value
+        updateQuantity(props.id, newQuantity)
+    }
     const price = `₹ ${props.price.toFixed(2)}`;
     return (
         <>
@@ -28,7 +32,7 @@ const CartItem = (props) => {
                                     max='10'
                                     id={`quantity-${props.id}`}
                                     value={props.quantity}
-                                    onChange={(event) => updateQuantity(props.id, +event.target.value)}
+                                    onChange={handleQuantityChange}
                                 >
                                 </Form.Control>
                             </Form>
