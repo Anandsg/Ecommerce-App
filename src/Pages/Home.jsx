@@ -1,42 +1,50 @@
-import { Fragment } from "react";
-import { Container, ListGroup, ListGroupItem, Button } from "react-bootstrap";
-import { BsPlayCircle } from "react-icons/bs";
+import React from "react";
+import { Button, Container, ListGroup, ListGroupItem } from "react-bootstrap";
 import stylesheet from "./Home.module.css";
+import { BsPlayCircle } from "react-icons/bs";
+
 const tourData = [
   {
-    id: 1,
+    id: "t1",
     date: "JUL 16",
     location: "DETROIT, MI",
     title: "DTE ENERGY MUSIC THEATRE",
   },
   {
-    id: 2,
+    id: "t2",
     date: "JUL 19",
-    location: "TORONTO, ON    ",
+    location: "TORONTO, ON",
     title: "BUDWEISER STAGE",
   },
   {
-    id: 3,
+    id: "t3",
     date: "JUL 22",
     location: "BRISTOW, VA",
-    title: "JIGGY LUBE LIVE",
+    title: "JIFFY LUBE LIVE",
   },
   {
-    id: 4,
+    id: "t4",
     date: "JUL 29",
     location: "PHOENIX, AZ",
     title: "AK-CHIN PAVILION",
   },
   {
-    id: 5,
-    date: "Aug 2",
+    id: "t5",
+    date: "AUG 2",
     location: "LAS VEGAS, NV",
     title: "T-MOBILE ARENA",
   },
+  {
+    id: "t6",
+    date: "AUG 7",
+    location: "CONCORD, CA",
+    title: "CONCORD PAVILION",
+  },
 ];
+
 const tours = tourData.map((tour) => {
   return (
-    <ListGroupItem style={{ border: "none" }}>
+    <ListGroupItem stylesheet={{ border: "none" }}>
       <div
         style={{
           display: "flex",
@@ -62,7 +70,7 @@ const tours = tourData.map((tour) => {
     </ListGroupItem>
   );
 });
-const Home = (props) => {
+const Home = () => {
   return (
     <>
       <div className={stylesheet["home-container"]}>
@@ -84,4 +92,5 @@ const Home = (props) => {
     </>
   );
 };
+
 export default Home;
